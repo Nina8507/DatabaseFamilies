@@ -79,7 +79,6 @@ namespace DatabaseFamilies.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HairColor")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Height")
@@ -90,7 +89,6 @@ namespace DatabaseFamilies.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Sex")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Weight")
@@ -131,12 +129,10 @@ namespace DatabaseFamilies.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("TEXT");
 
@@ -180,11 +176,9 @@ namespace DatabaseFamilies.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Species")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

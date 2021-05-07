@@ -14,13 +14,13 @@ namespace DatabaseFamilies.Models
         public override string FirstName { get; set; }
         [Required]
         public override string LastName { get; set; }
-        [Required]
+       
         public override string HairColor { get; set; }
-        [Required]
+      
         public override int Age { get; set; }
         public override float Weight { get; set; }
         public override int Height { get; set; }
-        [Required]
+     
         public override string Sex { get; set; }
         
         public override string ToString()

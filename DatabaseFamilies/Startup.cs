@@ -2,6 +2,7 @@ using DatabaseFamilies.Models;
 using DatabaseFamilies.Persistence;
 using DatabaseFamilies.Repository;
 using DatabaseFamilies.Repository.AdultREP;
+using DatabaseFamilies.Repository.FamilyREP;
 using DatabaseFamilies.Repository.UserREP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,7 @@ namespace DatabaseFamilies
         {
             services.AddControllers();
             services.AddDbContext<CloudContext>();
+            services.AddScoped<IRepository<Family>, FamilyRepository>();
             services.AddScoped<IRepository<Adult>, AdultRepository>();
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

@@ -9,10 +9,11 @@ namespace DatabaseFamilies.Models
         [Key]
         [JsonPropertyName("interestId")]
         public int Id { get; set; }
-        [Required, StringLength(25)]
+        [StringLength(25)]
         [JsonPropertyName("interestType")]
         public string Type { get; set; }
-        [Required, StringLength(50)]
+        [StringLength(50)]
+        [JsonPropertyName("description")]
         public string Description { get; set; }
         
         public override string ToString()

@@ -39,12 +39,12 @@ namespace DatabaseFamilies.Controllers
             }
         }
         [HttpGet]
-        public async Task<ActionResult<IList<Adult>>> GetAllUsersAsync()
+        public async Task<ActionResult<IList<Adult>>> GetAllAdultsAsync()
         {
             try
             {
-                IList<Adult> _adultList = await _adultRepo.GetAllAsync();
-                return Ok(_adultList);
+                IList<Adult> adultList = await _adultRepo.GetAllAsync();
+                return Ok(adultList);
             }
             catch (Exception e)
             {

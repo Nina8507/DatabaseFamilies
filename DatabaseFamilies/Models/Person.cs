@@ -13,13 +13,10 @@ namespace DatabaseFamilies.Models
         public virtual string FirstName { get; set; }
         [Required]
         public virtual string LastName { get; set; }
-        [Required]
-        public virtual string HairColor { get; set; }      
-        [Required]
+        public virtual string HairColor { get; set; }
         public virtual int Age { get; set; }
         public virtual float Weight { get; set; }
         public virtual int Height { get; set; }
-        [Required]
         public virtual string Sex { get; set; }
         
         public override string ToString()
