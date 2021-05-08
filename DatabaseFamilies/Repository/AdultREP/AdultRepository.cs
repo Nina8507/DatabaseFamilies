@@ -13,10 +13,6 @@ namespace DatabaseFamilies.Repository.AdultREP
         {
             await using CloudContext _context = new CloudContext();
             IList<Adult> adultsToReturn =  await _context.AdultTable.Include(a=> a.JobTitle).ToListAsync();
-            foreach (var a in adultsToReturn)
-            {
-                Console.WriteLine(a.FirstName);
-            }
             return adultsToReturn; 
         }
 

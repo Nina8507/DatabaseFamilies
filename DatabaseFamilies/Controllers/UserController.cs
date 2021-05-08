@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatabaseFamilies.Models;
 using DatabaseFamilies.Repository;
@@ -52,22 +51,6 @@ namespace DatabaseFamilies.Controllers
                 Console.WriteLine(userToAdd);
                 return Created($"/{userToAdd.UserName}", userToAdd);
                 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-                return StatusCode(500, e.Message);
-            }
-        }
-        
-        [HttpGet]
-        [Route("{id:int}")]
-        public async Task<ActionResult<IList<User>>> GetAdultsAsync([FromRoute] int id)
-        {
-            try
-            {
-                IList<User> adults = new[] {await _userRepo.GetByIdAsync(id)};
-                return Ok(adults);
             }
             catch (Exception e)
             {

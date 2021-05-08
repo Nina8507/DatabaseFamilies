@@ -9,20 +9,17 @@ namespace DatabaseFamilies.Repository.FamilyREP
 {
     public class FamilyRepository : IRepository<Family>
     {
-        private readonly CloudContext _context;
-
-        public FamilyRepository(CloudContext context)
-        {
-            _context = context;
-        }
-
+        
         public async Task<IList<Family>> GetAllAsync()
         {
-            return await _context.FamilyTable.ToListAsync();
+            await using CloudContext _context = new CloudContext();
+            IList<Family> familiesToReturn = await _context.FamilyTable.Include(a=> a.Adults).ThenInclude(j=> j.JobTitle).ToListAsync();
+            return familiesToReturn;
         }
 
         public async Task<Family> GetByIdAsync(int familyId)
         {
+            await using CloudContext _context = new CloudContext();
             Family famToFind = await _context.FamilyTable.FirstOrDefaultAsync(f => f.Id == familyId);
             if (famToFind != null)
             {
@@ -38,6 +35,7 @@ namespace DatabaseFamilies.Repository.FamilyREP
         {
             try
             {
+                await using CloudContext _context = new CloudContext();
                 var newFamily = await _context.FamilyTable.AddAsync(family);
                 await _context.SaveChangesAsync();
                 return newFamily.Entity;
@@ -51,6 +49,7 @@ namespace DatabaseFamilies.Repository.FamilyREP
 
         public async Task RemoveAsync(int familyId)
         {
+            await using CloudContext _context = new CloudContext();
             Family famToRemove = await _context.FamilyTable.FirstOrDefaultAsync(f => f.Id == familyId);
             if (famToRemove != null)
             {
@@ -61,6 +60,7 @@ namespace DatabaseFamilies.Repository.FamilyREP
 
         public async Task<Family> UpdateAsync(Family family)
         {
+            await using CloudContext _context = new CloudContext();
             try
             {
                 Family famToUpdate = await _context.FamilyTable.FirstAsync(f => f.Id == family.Id);

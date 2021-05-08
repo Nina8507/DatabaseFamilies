@@ -23,6 +23,7 @@ namespace DatabaseFamilies.Controllers
             try
             {
                 IList<Family> families = await _famRepo.GetAllAsync();
+                Console.WriteLine(families.Count);
                 return Ok(families);
             }
             catch (Exception e)
@@ -52,6 +53,5 @@ namespace DatabaseFamilies.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-        
     }
 }
