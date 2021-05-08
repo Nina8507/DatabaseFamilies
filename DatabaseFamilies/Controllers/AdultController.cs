@@ -44,12 +44,57 @@ namespace DatabaseFamilies.Controllers
             try
             {
                 IList<Adult> adultList = await _adultRepo.GetAllAsync();
+                Console.WriteLine(adultList.Count);
                 return Ok(adultList);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 return StatusCode(500, e.Message);
+            }
+        }
+        [HttpPatch]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Adult>> UpdateAdultAsync([FromBody] Adult adult)
+        {
+            try
+            {
+                Adult adultToUpdate = await _adultRepo.UpdateAsync(adult);
+                return Ok(adultToUpdate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Adult>> GetAdultAsync([FromRoute] int id)
+        {
+            try
+            {
+                Adult adultAsync = await _adultRepo.GetByIdAsync(id);
+                return Ok(adultAsync);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+                throw;
+            }
+        }
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task DeleteAdultAsync([FromRoute] int id)
+        {
+            try
+            {
+                await _adultRepo.RemoveAsync(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
             }
         }
     }

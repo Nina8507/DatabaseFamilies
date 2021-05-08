@@ -9,20 +9,21 @@ namespace DatabaseFamilies.Repository.AdultREP
 {
     public class AdultRepository:IRepository<Adult>
     {
-        private readonly CloudContext _context;
-
-        public AdultRepository(CloudContext context)
-        {
-            _context = context;
-        }
         public async Task<IList<Adult>> GetAllAsync()
         {
-            return await _context.AdultTable.ToListAsync();
+            await using CloudContext _context = new CloudContext();
+            IList<Adult> adultsToReturn =  await _context.AdultTable.Include(a=> a.JobTitle).ToListAsync();
+            foreach (var a in adultsToReturn)
+            {
+                Console.WriteLine(a.FirstName);
+            }
+            return adultsToReturn; 
         }
 
         public async Task<Adult> GetByIdAsync(int adultId)
         {
-            Adult adultToFind = await _context.AdultTable.FirstOrDefaultAsync(a=>  a.Id == adultId);
+            await using CloudContext _context = new CloudContext();
+            Adult adultToFind = await _context.AdultTable.Include(a=> a.JobTitle).FirstOrDefaultAsync(a=>  a.Id == adultId);
             if (adultToFind != null)
             {
                 return adultToFind;
@@ -35,6 +36,7 @@ namespace DatabaseFamilies.Repository.AdultREP
 
         public async Task<Adult> AddAsync(Adult adult)
         {
+            await using CloudContext _context = new CloudContext();
             try
             {
                 var newAdult = await _context.AdultTable.AddAsync(adult);
@@ -50,6 +52,7 @@ namespace DatabaseFamilies.Repository.AdultREP
 
         public async Task RemoveAsync(int adultId)
         {
+            await using CloudContext _context = new CloudContext();
             Adult adultToRemove = await _context.AdultTable.FirstOrDefaultAsync(a => a.Id == adultId);
             if (adultToRemove != null)
             {
@@ -60,6 +63,7 @@ namespace DatabaseFamilies.Repository.AdultREP
 
         public async Task<Adult> UpdateAsync(Adult adult)
         {
+            await using CloudContext _context = new CloudContext();
             try
             {
                 Adult adultToUpdate = await _context.AdultTable.FirstAsync(a => a.Id == adult.Id);

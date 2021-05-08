@@ -9,6 +9,9 @@ namespace DatabaseFamilies.Persistence
         public DbSet<Family> FamilyTable { get; set; }
         public DbSet<Adult> AdultTable { get; set; }
         public DbSet<Child> ChildTable { get; set; }
+        public DbSet<Pet> PetTable { get; set; }
+        public DbSet<Interest> Interests { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

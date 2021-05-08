@@ -52,5 +52,6 @@ namespace DatabaseFamilies.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+        
     }
 }
