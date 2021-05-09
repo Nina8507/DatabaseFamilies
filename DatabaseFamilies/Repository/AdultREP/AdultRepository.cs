@@ -62,7 +62,7 @@ namespace DatabaseFamilies.Repository.AdultREP
             await using CloudContext _context = new CloudContext();
             try
             {
-                Adult adultToUpdate = await _context.AdultTable.FirstAsync(a => a.Id == adult.Id);
+                Adult adultToUpdate = await _context.AdultTable.Include(a=> a.JobTitle).FirstAsync(a => a.Id == adult.Id);
                 _context.Update(adultToUpdate);
                 await _context.SaveChangesAsync();
                 return adultToUpdate;
